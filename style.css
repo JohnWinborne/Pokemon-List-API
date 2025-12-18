@@ -1,0 +1,365 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  color: black;
+}
+
+body {
+  background-color: #f5f5f5;
+  color: #242424;
+}
+
+li {
+  list-style: none;
+}
+
+p {
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
+section {
+  background-color: rgb(245, 245, 245);
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Buttons */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* HEADER / NAV */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 20;
+  background-color: rgb(92, 0, 0);
+}
+
+.header-inner {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Nav */
+
+.logo__text {
+  font-weight: 900;
+  color: black;
+  font-size: 22px;
+}
+
+.main__nav a {
+  font-size: 15px;
+  font-weight: 700;
+  color: black;
+  position: relative;
+  padding-bottom: 3px;
+}
+
+.main__nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: black;
+  transition: all 300ms ease;
+}
+
+.main__nav a:hover::after {
+  width: 100%;
+}
+
+/* POKEMON SEARCH */
+
+.pokemon {
+  position: relative;
+  min-height: 320px;
+  padding-top: 80px;
+  background-size: cover;
+  background-position: center;
+  background-color: black;
+  /* change back ground later */
+  color: white;
+}
+
+.pokemon__content {
+  text-align: center;
+  padding: 60px 0 70px;
+}
+
+.pokemon h1 {
+  font-size: 40px;
+  margin-bottom: 24px;
+}
+
+.search__bar {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 999px;
+  padding: 6px 6px 6px 24px;
+  display: flex;
+  align-items: center;
+}
+
+.search__bar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+.search__bar input::placeholder {
+  color: #b0b0b0;
+}
+
+.search__button {
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  background: black;
+  color: white;
+  transition: transform 150ms ease, background-color 150ms ease;
+}
+
+.search__button:hover {
+  transform: translateY(-1px);
+  background: rgb(71, 71, 71);
+}
+
+/* MAIN CONTENT / FILTERS */
+
+.main__content {
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+
+.results__header {
+  display: flex;
+  justify-content: space-between;
+  /* gap: 32px; */
+  margin-bottom: 24px;
+}
+
+.results__header h2 {
+  font-size: 22px;
+  color: black;
+}
+
+/* Filters container */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 24px;
+}
+
+.filter__group {
+  min-width: 210px;
+}
+
+.filter__group label {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+option {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+option[value="normal"] {
+  background-color: rgb(161, 147, 126);
+}
+
+option[value="fire"] {
+  background-color: orange;
+}
+
+option[value="water"] {
+  background-color: rgb(65, 135, 226);
+}
+
+option[value="grass"] {
+  background-color: rgb(11, 194, 11);
+}
+option[value="electric"] {
+  background-color: yellow;
+}
+option[value="ice"] {
+  background-color: lightskyblue;
+}
+option[value="fighting"] {
+  background-color: rgb(216, 0, 0);
+}
+option[value="poison"] {
+  background-color: rgb(153, 1, 153);
+}
+option[value="ground"] {
+  background-color: rgb(197, 146, 51);
+}
+option[value="flying"] {
+  background-color: silver;
+}
+option[value="psychic"] {
+  background-color: pink;
+}
+option[value="bug"] {
+  background-color: rgb(96, 214, 96);
+}
+option[value="rock"] {
+  background-color: rgb(119, 99, 43);
+}
+option[value="ghost"] {
+  background-color: rgb(124, 75, 124);
+}
+option[value="dragon"] {
+  background-color: rgb(155, 114, 39);
+}
+option[value="dark"] {
+  background-color: black;
+  color: white;
+}
+option[value="steel"] {
+  background-color: slategrey;
+}
+option[value="fairy"] {
+  background-color: plum;
+}
+
+/* use javascript to change color */
+#type__filter {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid black;
+  background: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* Generation range */
+
+.filter__label--row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.generation__sliders {
+  display: flex;
+  align-items: center;
+}
+
+.generation__sliders input[type="range"] {
+  accent-color: black;
+}
+
+.gen__min {
+  margin-right: 10px;
+}
+
+/* POKEMON */
+
+#results {
+  display: flex;
+  margin-top: 16px;
+  width: 500px;
+}
+
+.pokemon__results {
+  /* I want to change the width and height later */
+  width: 100%;
+  height: 250px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+  padding: 18px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.pokemon__results:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.pokemon__info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pokemon__name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.pokemon__number {
+  font-size: 14px;
+  color: #6f6f6f;
+}
+
+/* Meta info list */
+
+.pokemon__meta {
+  margin-top: 6px;
+}
+
+.pokemon__meta li {
+  display: flex;
+  gap: 6px;
+  font-size: 14px;
+  color: #000000;
+  font-weight: bold;
+}
+
+.meta__label {
+  font-weight: bold;
+  color: #7a5cff;
+}
+
+/* RESPONSIVE */

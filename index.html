@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>John Winborne</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="index.js"></script>
+  </head>
+
+  <body>
+    <!-- HEADER / NAV  -->
+    <header id="home" class="site-header">
+      <div class="container header-inner">
+        <div>
+          <span class="logo__text">Pokémon</span>
+        </div>
+        <nav class="main__nav">
+          <a href="#home" class="btn">Home</a>
+          <a href="#contact" class="btn">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!--  Pokémon SEARCH  -->
+    <section class="pokemon">
+      <div class="container pokemon__content">
+        <h1>Browse Pokémon</h1>
+        <form id="search__form" class="search__bar">
+          <input id="search__input" type="text" placeholder="Search by name" />
+          <button type="submit" class="search__button" aria-label="Search">
+            submit
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- FILTERS -->
+    <main class="container main__content">
+      <section class="results__header">
+        <h2>Search results:</h2>
+
+        <div class="filters">
+          <div class="filter__group">
+            <label for="type__filter">Type:</label>
+            <select id="type__filter" name="type">
+              <option value="">All types</option>
+              <option value="normal">Normal</option>
+              <option value="fire">Fire</option>
+              <option value="water">Water</option>
+              <option value="grass">Grass</option>
+              <option value="electric">Electric</option>
+              <option value="ice">Ice</option>
+              <option value="fighting">Fighting</option>
+              <option value="poison">Poison</option>
+              <option value="ground">Ground</option>
+              <option value="flying">Flying</option>
+              <option value="psychic">Psychic</option>
+              <option value="bug">Bug</option>
+              <option value="rock">Rock</option>
+              <option value="ghost">Ghost</option>
+              <option value="dragon">Dragon</option>
+              <option value="dark">Dark</option>
+              <option value="steel">Steel</option>
+              <option value="fairy">Fairy</option>
+            </select>
+          </div>
+
+          <!-- GENERATION FILTER -->
+          <div class="filter__group">
+            <div class="filter__label--row">
+              <span>Generation range:</span>
+              <span id="generation__range--label">1 to 9</span>
+            </div>
+            <!-- Add Javascript for slider and type-->
+            <div class="generation__sliders">
+              <div>
+                <input
+                  class="gen__min"
+                  type="range"
+                  min="1"
+                  max="9"
+                  value="1"
+                />
+                <p>min</p>
+              </div>
+              <div>
+                <input
+                  class="gen__max"
+                  type="range"
+                  min="1"
+                  max="9"
+                  value="9"
+                />
+                <p>max</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- POKEMON -->
+      <section id="results">
+        <div class="pokemon__results">
+          <!-- Get pokemon from API -->
+
+          <div class="pokemon__info">
+            <h3 class="pokemon__name">Pikachu</h3>
+            <p class="pokemon__number">#025, Generation 1</p>
+
+            <ul class="pokemon__meta">
+              <li><span class="meta__label">Type:</span> Electric</li>
+              <li><span class="meta__label">Base Stat Total:</span> 320</li>
+              <li><span class="meta__label">Primary Ability:</span> Static</li>
+            </ul>
+          </div>
+        </div>
+        <!-- More pokemon will be injected here by JavaScript using the GraphQL API later -->
+      </section>
+    </main>
+  </body>
+</html>
