@@ -207,62 +207,62 @@ option {
   font-weight: bold;
 }
 
-option[value="normal"] {
+option[value="Normal"] {
   background-color: rgb(161, 147, 126);
 }
 
-option[value="fire"] {
+option[value="Fire"] {
   background-color: orange;
 }
 
-option[value="water"] {
+option[value="Water"] {
   background-color: rgb(65, 135, 226);
 }
 
-option[value="grass"] {
+option[value="Grass"] {
   background-color: rgb(11, 194, 11);
 }
-option[value="electric"] {
+option[value="Electric"] {
   background-color: yellow;
 }
-option[value="ice"] {
+option[value="Ice"] {
   background-color: lightskyblue;
 }
-option[value="fighting"] {
+option[value="Fighting"] {
   background-color: rgb(216, 0, 0);
 }
-option[value="poison"] {
+option[value="Poison"] {
   background-color: rgb(153, 1, 153);
 }
-option[value="ground"] {
+option[value="Ground"] {
   background-color: rgb(197, 146, 51);
 }
-option[value="flying"] {
+option[value="Flying"] {
   background-color: silver;
 }
-option[value="psychic"] {
+option[value="Psychic"] {
   background-color: pink;
 }
-option[value="bug"] {
+option[value="Bug"] {
   background-color: rgb(96, 214, 96);
 }
-option[value="rock"] {
+option[value="Rock"] {
   background-color: rgb(119, 99, 43);
 }
-option[value="ghost"] {
+option[value="Ghost"] {
   background-color: rgb(124, 75, 124);
 }
-option[value="dragon"] {
+option[value="Dragon"] {
   background-color: rgb(155, 114, 39);
 }
-option[value="dark"] {
+option[value="Dark"] {
   background-color: black;
   color: white;
 }
-option[value="steel"] {
+option[value="Steel"] {
   background-color: slategrey;
 }
-option[value="fairy"] {
+option[value="Fairy"] {
   background-color: plum;
 }
 

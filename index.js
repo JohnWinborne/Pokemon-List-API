@@ -1,20 +1,50 @@
 // TODO
 //  FIX generation and display it
-// ADD filtering
+// ADD filtering and add numbers for the selected gen filter
 // ADD load more button
 // ADD descriptions for stats and more stats
+// ADD js for search bar
 //store the pokemonResults id  where pokemon get inserted
 // make it so you can click a pokemon maybe
 
 //store the pokemonResults id  where pokemon get inserted
 const resultsEl = document.getElementById("pokemonResults");
+//store the type id where type can change
+const typeFilter = document.getElementById("type__filter");
+
+let allPokemon = []; // holds everything I fetch
 
 //the Graphql API url im sending requests to
 const ENDPOINT = "https://graphqlpokemon.favware.tech/v8";
 //offset tracks where I am in the api list
 let offset = 0;
 //take is the amount i take from the api
-const take = 108;
+const take = 100;
+
+//function where filters will be added
+function applyFilters() {
+  //grab filter type
+  const selectedType = typeFilter.value;
+
+  let filtered = allPokemon;
+// only applies filter if there is a selected type
+  if (selectedType) {
+// goes through every pokemon in filtered and keeps them if
+//  t.name === selected where t is one item inside p.types 
+// and som() loops over the array one element at a time
+    filtered = filtered.filter((p) =>
+      p.types.some((t) => t.name === selectedType)
+    );
+  }
+
+  renderPokemonList(filtered);
+}
+
+//take a list and displays it
+function renderPokemonList(list) {
+  resultsEl.innerHTML = list.map(renderPokemon).join("");
+}
+
 
 function renderPokemon(p) {
   const num = p.num;
@@ -46,16 +76,12 @@ function renderPokemon(p) {
 
 //async function so i can use await fetch inside
 async function loadPokemon() {
-  const wanted = take;
-  //gets 50 pokemon at a time
-  const batchSize = 50;
-  // this holds pokemon
-  let collected = [];
+  const wanted = take;      // how many NEW pokemon you want to add this click
+  const batchSize = 50;     // how many to request from API each loop
+  let collected = [];       // holds the NEW filtered pokemon for this call
 
   try {
-    //keep fetching until i get how many i wanted
     while (collected.length < wanted) {
-      //GraphQl query string that requests getAllPokemon
       const query = `
         {
           getAllPokemon(take: ${batchSize}, offset: ${offset}) {
@@ -69,14 +95,12 @@ async function loadPokemon() {
         }
       `;
 
-      // sends a POST request to GraphQl endpoint
       const res = await fetch(ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query }),
       });
 
-      //convert the HTTP response to a JS object
       const data = await res.json();
 
       if (data.errors) {
@@ -84,43 +108,55 @@ async function loadPokemon() {
         return;
       }
 
-      const batch = data.data.getAllPokemon;
+      //use the pokemon array if it exist otherwise use []
+      const batch = data.data.getAllPokemon || [];
 
-      // Move offset forward by what we actually requested
+      // Move offset forward by what we asked for
       offset += batchSize;
 
-      //remove Pokestar and filters the first 1025
+      // filter to main dex + remove Pokestar
       const realDex = batch.filter((p) => {
         const n = Number(p.num);
-        //rejects nan, infinity
         if (!Number.isFinite(n)) return false;
-
-        // keep only main-ish dex range
         if (n < 1 || n > 1025) return false;
-
-        // remove obvious non-standard forms in this API
         if ((p.species || "").startsWith("Pokestar")) return false;
-
         return true;
       });
 
-      //adds all fiiltered Pokemon to the collected array
       collected.push(...realDex);
 
-      //if API ever returns nothing, break to avoid infinite loop
+      // safety: stop if API returns nothing
       if (batch.length === 0) break;
     }
 
-    // Sort all collected Pokemon by num, then keeps only the wanted
+    // keep only how many we wanted to add
     collected = collected
       .sort((a, b) => Number(a.num) - Number(b.num))
       .slice(0, wanted);
 
-    //uses renderPokemon to convert to html
-    resultsEl.innerHTML += collected.map(renderPokemon).join("");
+    //append NEW pokemon into the list from the NEW batch
+    allPokemon = allPokemon.concat(collected);
+
+    //sort list so page is always in order
+    allPokemon.sort((a, b) => {
+      //convert to num
+      const an = Number(a.num);
+      const bn = Number(b.num);
+      //makes sure smaller number comes first
+      if (an !== bn) return an - bn;
+      //runs only if two pokemon share the same number to sort alphanetically
+      return String(a.species).localeCompare(String(b.species));
+    });
+
+    applyFilters();
   } catch (err) {
     console.error("Fetch error:", err);
   }
 }
+
+//tells the browser to watch this element for something to happen
+//with change being the event type and passing the function that should call
+//when the event happens
+typeFilter.addEventListener("change", applyFilters);
 
 loadPokemon();
