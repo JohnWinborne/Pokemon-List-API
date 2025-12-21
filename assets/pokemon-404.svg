@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+  <rect width="120" height="120" rx="12" fill="#f2f2f2"></rect>
+  
+  <text x="60" y="48" text-anchor="middle" font-size="20" font-family="Arial, sans-serif" font-weight="bold" fill="#555">
+    404
+  </text>
+
+  <text x="60" y="70" text-anchor="middle" font-size="10" font-family="Arial, sans-serif" fill="#777">
+    Sprite
+  </text>
+
+  <text x="60" y="85" text-anchor="middle" font-size="10" font-family="Arial, sans-serif" fill="#777">
+    Not Found
+  </text>
+</svg>
