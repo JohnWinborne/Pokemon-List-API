@@ -1,7 +1,7 @@
 // TODO
 //  Skele load state
-// search bar
 // responsiveness
+// add better background maybe
 
 //store the pokemonResults id  where pokemon get inserted
 const resultsEl = document.getElementById("pokemonResults");
@@ -10,7 +10,10 @@ const typeFilter = document.getElementById("type__filter");
 const genMinEl = document.querySelector(".gen__min");
 const genMaxEl = document.querySelector(".gen__max");
 const genLabelEl = document.getElementById("generation__range--label");
+const searchForm = document.getElementById("search__form");
+const searchInput = document.getElementById("search__input");
 
+let searchTerm = ""; // current search text
 let allPokemon = []; // holds everything I fetch
 
 //the Graphql API url im sending requests to
@@ -108,6 +111,18 @@ function applyFilters() {
       p.types.some((t) => t.name === selectedType)
     );
   }
+
+  // apply search bar
+  //trim removes whitespace from both ends of a string and turn it into
+  //lower case
+  const search = (searchTerm || "").trim().toLowerCase();
+  // if search actual exists filter true when p.species includes search
+  if (search) {
+    filtered = filtered.filter((p) =>
+      (p.species || "").toLowerCase().includes(search)
+    );
+  }
+
   // keep results ordered by dex number
   filtered.sort((a, b) => Number(a.num) - Number(b.num));
   renderPokemonList(filtered);
@@ -150,6 +165,9 @@ function renderPokemon(p) {
 
 //async function so i can use await fetch inside to grab pokemon
 async function loadPokemon() {
+  //add the loading state for spinner
+  resultsEl.classList.add("pokemon__loading");
+
   const wanted = take; // how many NEW pokemon you want to add this click
   const batchSize = 100; // how many to request from API each loop
   // Track which dex numbers we already have
@@ -195,9 +213,9 @@ async function loadPokemon() {
       // stop if API returns nothing
       if (batch.length === 0) break;
 
-      // go through all pokemon one p at a time 
+      // go through all pokemon one p at a time
       for (const p of batch) {
-        //convert p.num to a number cause it might be a string 
+        //convert p.num to a number cause it might be a string
         const n = Number(p.num);
 
         // main dex only
@@ -222,6 +240,8 @@ async function loadPokemon() {
   } catch (err) {
     console.error("Fetch error:", err);
   }
+  //remove the spinner
+  resultsEl.classList.remove("pokemon__loading");
 }
 
 //tells the browser to watch this element for something to happen
@@ -239,6 +259,15 @@ if (genMaxEl)
     updateGenLabel();
     applyFilters();
   });
+
+// Live search as you type
+if (searchInput) {
+  searchInput.addEventListener("input", () => {
+    // update searchTerm with the searchInput value
+    searchTerm = searchInput.value;
+    applyFilters();
+  });
+}
 
 // init label + load data
 updateGenLabel();

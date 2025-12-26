@@ -124,10 +124,12 @@ a {
 .pokemon h1 {
   font-size: 40px;
   margin-bottom: 24px;
+  color: white;
 }
 
 .search__bar {
   max-width: 600px;
+  height: 50px;
   margin: 0 auto;
   background-color: white;
   border-radius: 999px;
@@ -145,22 +147,6 @@ a {
 
 .search__bar input::placeholder {
   color: #b0b0b0;
-}
-
-.search__button {
-  border-radius: 999px;
-  padding: 10px 20px;
-  font-weight: 700;
-  font-size: 14px;
-  text-transform: uppercase;
-  background: black;
-  color: white;
-  transition: transform 150ms ease, background-color 150ms ease;
-}
-
-.search__button:hover {
-  transform: translateY(-1px);
-  background: rgb(71, 71, 71);
 }
 
 /* MAIN CONTENT / FILTERS */
@@ -308,7 +294,7 @@ option[value="Fairy"] {
   width: 100%;
 }
 
-/* FLEX CONTAINER (was grid) */
+/* FLEX CONTAINER */
 .pokemon__results {
   display: flex;
   flex-wrap: wrap; /* allows multiple rows */
@@ -316,7 +302,7 @@ option[value="Fairy"] {
   align-items: stretch;
 }
 
-/* EACH POKEMON CARD */
+/* EACH POKEMON */
 .pokemon__info {
   background: white;
   border-radius: 16px;
@@ -325,11 +311,8 @@ option[value="Fairy"] {
   display: flex;
   flex-direction: column;
   gap: 6px;
-
-  /* CARD SIZE */
   flex: 1 1 260px; /* grow, shrink, base width */
   max-width: 320px; /* prevents giant cards on wide screens */
-
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
@@ -345,5 +328,62 @@ option[value="Fairy"] {
   align-self: center;
 }
 
+.pokemon__loading--spinner {
+  /* position absolute with top and left 50% centers */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 100px;
+  color: black;
+  display: none !important;
+}
 
-/* RESPONSIVE */
+/* show spinner only when loading */
+.pokemon__loading .pokemon__loading--spinner {
+  display: block !important;
+}
+
+.fa-spinner {
+  animation: rotate 600ms infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* RESPONSIVENESS */
+
+@media (max-width: 768px) {
+  .generation__sliders {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  .logo__text {
+    font-size: 18px;
+  }
+
+  .header-inner {
+    height: 64px;
+  }
+
+  .pokemon {
+    padding-top: 64px;
+  }
+
+  .pokemon h1 {
+    font-size: 24px;
+  }
+
+  .filters {
+    flex-direction: column;
+  }
+}
